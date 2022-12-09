@@ -1,18 +1,56 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="content">
+    <Form />
+    <Spinner v-if="isLoaded" />
+    <WeatherCard :items="getData" isMainCards />
+    <Chart />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Form from "@/components/Form.vue";
+import WeatherCard from "@/components/WeatherCard";
+import Chart from "@/components/Chart";
+import Spinner from "@/components/UI/Spinner";
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'HomeView',
   components: {
-    HelloWorld
-  }
-}
+    Form,
+    WeatherCard,
+    Chart,
+    Spinner,
+  },
+  computed: {
+    ...mapGetters(["getData", "isLoaded"]),
+  },
+  data: () => ({
+    lastData: null,
+  }),
+  methods: {
+    getNotes() {
+      const localNotes = localStorage.getItem("notes");
+      if (localNotes) {
+        this.lastData = localNotes;
+      }
+    },
+  },
+  watch: {
+    getData: {
+      handler(updatedList) {
+        const filt = updatedList.filter((item) => item.isFavorite);
+        if (this.lastData) {
+          let parse = JSON.parse(this.lastData);
+          localStorage.setItem("notes", JSON.stringify([...parse, ...filt]));
+        } else {
+          localStorage.setItem("notes", JSON.stringify(filt));
+        }
+      },
+      deep: true,
+    },
+  },
+  mounted() {
+    this.getNotes();
+  },
+};
 </script>
