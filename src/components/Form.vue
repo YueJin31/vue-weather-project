@@ -56,8 +56,6 @@ export default {
       this.search = "";
       this.setNewCity(this.state);
 
-      console.log(this.getError);
-
       if (!this.getError) {
         localStorage.setItem("city-list", JSON.stringify(this.states));
       }

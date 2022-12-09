@@ -28,8 +28,8 @@ export default {
     lastData: null,
   }),
   methods: {
-    getNotes() {
-      const localNotes = localStorage.getItem("notes");
+    getFavorites() {
+      const localNotes = localStorage.getItem("favorites");
       if (localNotes) {
         this.lastData = localNotes;
       }
@@ -41,16 +41,16 @@ export default {
         const filt = updatedList.filter((item) => item.isFavorite);
         if (this.lastData) {
           let parse = JSON.parse(this.lastData);
-          localStorage.setItem("notes", JSON.stringify([...parse, ...filt]));
+          localStorage.setItem("favorites", JSON.stringify([...parse, ...filt]));
         } else {
-          localStorage.setItem("notes", JSON.stringify(filt));
+          localStorage.setItem("favorites", JSON.stringify(filt));
         }
       },
       deep: true,
     },
   },
   mounted() {
-    this.getNotes();
+    this.getFavorites();
   },
 };
 </script>

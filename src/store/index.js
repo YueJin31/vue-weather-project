@@ -6,8 +6,7 @@ export default createStore({
   state: {
     apiBase: "https://api.openweathermap.org/data/2.5/",
     apiKey: process.env.VUE_APP_API_WEATHER,
-    defaultSearch: "Kharkiv",
-    search: "Kharkiv",
+    search: "",
     isError: false,
     weatherData: [],
     favoriteData: [],
@@ -57,6 +56,9 @@ export default createStore({
     getFavoriteData(state) {
       return state.favoriteData.filter((item) => item.isFavorite);
     },
+    returnfavoriteDataLenght(state) {
+      return state.favoriteData.length;
+    },
   },
   mutations: {
     setSearch(state, search) {
@@ -79,6 +81,9 @@ export default createStore({
       if (item.isFavorite && !state.favoriteData.includes(item)) {
         state.favoriteData.push(item);
       }
+    },
+    addToFavoriteFromLs(state, item) {
+      state.favoriteData.push(item);
     },
     changeStatus(state) {
       state.chartIsShow = true;

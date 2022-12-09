@@ -1,35 +1,34 @@
 <template>
   <div class="content">
-    <WeatherCard :items="getFavoriteData ? favList : getFavoriteData" />
+    <WeatherCard :items="returnfavoriteDataLenght == 0 ? favList : getFavoriteData" />
+    <Chart />
   </div>
-
-  {{ favList }}
-  {{ test }}
 </template>
 
 <script>
 import WeatherCard from "@/components/WeatherCard";
-import { mapGetters, mapActions } from "vuex";
-import { reactive } from "@vue/reactivity";
+import Chart from "@/components/Chart";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 
 export default {
   components: {
     WeatherCard,
+    Chart,
   },
   data: () => ({
     favList: null,
   }),
   computed: {
-    ...mapGetters(["getFavoriteData", "getData"]),
+    ...mapGetters(["getFavoriteData", "getData", "setWeatherData", "returnfavoriteDataLenght"]),
+    ...mapMutations(["addToFavorite"]),
 
-    test() {
-      const obj = { ...this.favList };
-      // return obj.filter((item) => item.isFavorite);
+    led() {
+      return this.favList;
     },
   },
   methods: {
-    getNotes() {
-      const localNotes = localStorage.getItem("notes");
+    getFavorites() {
+      const localNotes = localStorage.getItem("favorites");
       if (localNotes) {
         this.favList = JSON.parse(localNotes);
       }
@@ -39,13 +38,13 @@ export default {
     getFavoriteData: {
       handler(updatedList) {
         const filt = updatedList.filter((item) => item.isFavorite);
-        localStorage.setItem("notes", JSON.stringify(filt));
+        localStorage.setItem("favorites", JSON.stringify(filt));
       },
       deep: true,
     },
   },
   mounted() {
-    this.getNotes();
+    this.getFavorites();
   },
 };
 </script>
