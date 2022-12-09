@@ -5,12 +5,12 @@
       type="text"
       placeholder="Search City"
       class="search-control"
-      @keydown.enter="getData"
-      v-model.trim="search"
-      :disabled="isMaxLenght"
       autocomplete="off"
-      v-model="state"
+      @keydown.enter="getData"
       @focus="modal = true"
+      :disabled="isMaxLenght"
+      v-model.trim="search"
+      v-model="state"
     />
 
     <div class="auto-list" v-if="filteredStates && modal">
@@ -52,13 +52,14 @@ export default {
     ...mapActions(["fetchWeatherData", "fetchWeatherTemp"]),
 
     async getData() {
-      this.fetchWeatherData(this.search);
-      this.search = "";
-      this.setNewCity(this.state);
-
+      console.log(this.getError);
       if (!this.getError) {
         localStorage.setItem("city-list", JSON.stringify(this.states));
       }
+
+      this.fetchWeatherData(this.search);
+      this.search = "";
+      this.setNewCity(this.state);
     },
 
     filterStates() {
@@ -106,14 +107,14 @@ export default {
 
 <style lang="scss" scoped>
 .weather-search {
-  margin-bottom: 100px;
+  margin-bottom: 70px;
   position: relative;
 
   .wrapper {
     position: absolute;
     z-index: 0;
     top: 0;
-    height: 50vh;
+    height: 70vh;
     width: 100%;
     left: 0;
   }
@@ -146,12 +147,12 @@ export default {
     position: absolute;
     color: red;
     text-align: center;
-    bottom: -35px;
+    bottom: -60px;
     left: 0;
     right: 0;
     margin: auto;
     font-size: 20px;
-    z-index: 99;
+    z-index: 9;
   }
 
   .auto-list {
