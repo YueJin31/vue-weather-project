@@ -9,16 +9,8 @@ export default createStore({
     defaultSearch: "Kharkiv",
     search: "Kharkiv",
     isError: false,
-    weatherData: [
-      // { city: "Kharkiv", temp: 0, feelsLike: -4, description: "snow", icon: "13", isFavorite: false },
-      // { city: "Kyiv", temp: -4, feelsLike: -6, description: "scattered clouds", icon: "03", isFavorite: false },
-      // { city: "Lviv", temp: 0, feelsLike: -5, description: "clear sky", icon: "01", isFavorite: false },
-      // { city: "Dnipro", temp: 3, feelsLike: -1, description: "overcast clouds", icon: "04", isFavorite: false },
-      // { city: "Poltava", temp: 0, feelsLike: -2, description: "light snow", icon: "13", isFavorite: false },
-    ],
-    favoriteData: [
-      // { city: "Poltava", temp: 0, feelsLike: -2, description: "light snow", icon: "13", isFavorite: true },
-    ],
+    weatherData: [],
+    favoriteData: [],
     isLoad: false,
     chart: null,
     city: "",
@@ -117,7 +109,6 @@ export default createStore({
         commit("setWeatherData", newWeatherData);
         commit("setError", false);
       } catch (error) {
-        console.log(error);
         commit("setError", true);
         state.chartIsShow = false;
       }
