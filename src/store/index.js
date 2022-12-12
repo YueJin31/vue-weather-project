@@ -5,7 +5,7 @@ import Chart from "chart.js";
 export default createStore({
   state: {
     apiBase: "https://api.openweathermap.org/data/2.5/",
-    apiKey: process.env.VUE_APP_API_WEATHER,
+    apiKey: "fd3150a661c1ddc90d3aefdec0400de4",
     search: "",
     isError: false,
     weatherData: [],

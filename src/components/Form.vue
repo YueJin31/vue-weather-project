@@ -42,6 +42,7 @@ export default {
       state: "",
       states: ["Kharkiv", "Kyiv", "Lviv", "Dnipro", "Poltava", "Sumy", "Kherson"],
       filteredStates: [],
+      err: false,
     };
   },
   computed: {
@@ -52,14 +53,14 @@ export default {
     ...mapActions(["fetchWeatherData", "fetchWeatherTemp"]),
 
     async getData() {
+      this.fetchWeatherData(this.search);
+      this.search = "";
+      this.setNewCity(this.state);
+
       console.log(this.getError);
       if (!this.getError) {
         localStorage.setItem("city-list", JSON.stringify(this.states));
       }
-
-      this.fetchWeatherData(this.search);
-      this.search = "";
-      this.setNewCity(this.state);
     },
 
     filterStates() {
