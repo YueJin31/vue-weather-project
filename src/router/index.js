@@ -4,8 +4,8 @@ import FavoritesView from "@/views/FavoritesView.vue";
 
 const routes = [
   {
-    path: "/favorites",
-    redirect: { name: "favorites" },
+    path: "/",
+    redirect: { name: "home" },
   },
   {
     path: "/",
