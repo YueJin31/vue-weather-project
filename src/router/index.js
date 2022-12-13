@@ -8,7 +8,7 @@ const routes = [
     redirect: { name: "home" },
   },
   {
-    path: "/",
+    path: "/vue-weather-project/",
     name: "home",
     component: HomeView,
   },
@@ -20,6 +20,7 @@ const routes = [
 ];
 
 const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
   routes,
 });
 
