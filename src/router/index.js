@@ -9,7 +9,7 @@ const routes = [
     component: HomeView,
   },
   {
-    path: "/vue-weather-project/favorites",
+    path: "/favorites",
     name: "favorites",
     component: FavoritesView,
   },
