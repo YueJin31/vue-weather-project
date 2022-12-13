@@ -4,7 +4,7 @@ import FavoritesView from "@/views/FavoritesView.vue";
 
 const routes = [
   {
-    path: "/",
+    path: "",
     name: "home",
     component: HomeView,
   },
