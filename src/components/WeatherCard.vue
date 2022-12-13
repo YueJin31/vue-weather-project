@@ -1,6 +1,7 @@
 <template>
   <div class="weather-wrapper">
-    <div class="weather-main" v-if="!getError && isSearched" v-for="(item, index) in items" :key="index">
+    <!-- v-if="!getError && isSearched" -->
+    <div class="weather-main" v-for="(item, index) in items" :key="index">
       <span v-if="isMainCards" class="close" @click="openModal(index)">&#10006;</span>
       <svg
         class="heart"

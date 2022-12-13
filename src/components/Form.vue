@@ -52,12 +52,11 @@ export default {
     ...mapMutations(["setNewCity"]),
     ...mapActions(["fetchWeatherData", "fetchWeatherTemp"]),
 
-    async getData() {
+    getData() {
       this.fetchWeatherData(this.search);
       this.search = "";
       this.setNewCity(this.state);
 
-      console.log(this.getError);
       if (!this.getError) {
         localStorage.setItem("city-list", JSON.stringify(this.states));
       }

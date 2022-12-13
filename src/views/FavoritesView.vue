@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <WeatherCard :items="returnfavoriteDataLenght == 0 ? favList : getFavoriteData" />
+    <WeatherCard :items="getFavoriteData" />
     <Chart />
   </div>
 </template>
@@ -20,17 +20,22 @@ export default {
   }),
   computed: {
     ...mapGetters(["getFavoriteData", "getData", "setWeatherData", "returnfavoriteDataLenght"]),
-    ...mapMutations(["addToFavorite"]),
-
-    led() {
-      return this.favList;
-    },
+    ...mapMutations(["addToFavorite", "setWeatherData"]),
   },
   methods: {
     getFavorites() {
       const localNotes = localStorage.getItem("favorites");
       if (localNotes) {
+        this.favList = [];
         this.favList = JSON.parse(localNotes);
+      }
+    },
+
+    setItems() {
+      if (this.returnfavoriteDataLenght != 0 && this.favList) {
+        this.$store.commit("addToFavorite", ...this.favList);
+      } else if (this.returnfavoriteDataLenght == 0 && this.favList) {
+        this.$store.commit("setNewList", this.favList);
       }
     },
   },
@@ -45,6 +50,7 @@ export default {
   },
   mounted() {
     this.getFavorites();
+    this.setItems();
   },
 };
 </script>

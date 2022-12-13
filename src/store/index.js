@@ -82,6 +82,9 @@ export default createStore({
         state.favoriteData.push(item);
       }
     },
+    setNewList(state, list) {
+      state.favoriteData = list;
+    },
     addToFavoriteFromLs(state, item) {
       state.favoriteData.push(item);
     },
