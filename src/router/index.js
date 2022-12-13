@@ -5,10 +5,6 @@ import FavoritesView from "@/views/FavoritesView.vue";
 const routes = [
   {
     path: "/",
-    redirect: { name: "home" },
-  },
-  {
-    path: "/vue-weather-project/",
     name: "home",
     component: HomeView,
   },
